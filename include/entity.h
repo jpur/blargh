@@ -6,13 +6,13 @@
 namespace blargh {
 	class Entity : public Subject {
 	public:
-		void addComponent(Component comp);
-		void removeComponent(Component comp);
+		void addComponent(Component &comp);
+		void removeComponent(Component &comp);
+
+		int getId() const;
 
 	private:
-		Entity() = default;
-		long id;
-		std::vector<Component> components;
-		friend class EntityManager;
+		Entity(int id);
+		const int id;
 	}
 }

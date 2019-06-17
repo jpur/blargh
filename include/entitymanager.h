@@ -11,6 +11,7 @@ namespace blargh {
 		void destroyEntity(const std::shared_ptr<Entity> &entity);
 
 	private:
+		int nextEntityId = 0;
 		std::vector<std::shared_ptr<Entity>> entities;
 	}
 }
