@@ -8,7 +8,7 @@ namespace blargh {
 	class Matcher {
 	public:
 		bool matches(const Entity &entity) const {
-			return MatchHelper::check<Cn>(entity); 
+			return MatchHelper<Cn...>::check(entity); 
 		}
-	}
+	};
 }

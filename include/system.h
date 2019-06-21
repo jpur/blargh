@@ -3,20 +3,21 @@
 #include <memory>
 #include <vector>
 #include <string.h>
-#include "subject.h"
+#include "basesystem.h"
+#include "matcher.h"
 
 namespace blargh {
-	class System : public Subject, public Observer {
+	template <class... Tn>
+	class System : public BaseSystem {
 	public:
-		System(const Matcher &matcher);
-		void update();
-		void handleMessage(const std::string &msg, void *args);
+		System(const Matcher<Tn...> &matcher);
 
 	protected:
-		virtual void update(Entity &entity) = 0;
+		virtual bool isValid(Entity &entity) {
+			return matcher.matches(entity);
+		}
 
 	private:
-		const Matcher matcher;
-		std::vector<Entity *> entities;
-	}
+		const Matcher<Tn...> matcher;
+	};
 }

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <string.h>
+#include <string>
 
 namespace blargh {
 	class Observer {
 	public:
-		void handleMessage(const std::string &msg, void *args) = 0;
-	}
+		virtual void handleMessage(const std::string &msg, void *args) = 0;
+	};
 }

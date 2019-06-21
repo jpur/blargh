@@ -1,4 +1,4 @@
-OBJS = $(wildcard src/*.cpp)
+OBJS = $(wildcard src/*.cpp) $(wildcard src/ex/*.cpp)
 CC = g++
 CFLAGS = -I$(CURDIR)/include -Wall -Wextra -Wno-unused-parameter
 LFLAGS = -static-libstdc++

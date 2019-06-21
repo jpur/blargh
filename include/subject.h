@@ -1,6 +1,7 @@
 #pragma once
 
 #include "observer.h"
+#include <vector>
 
 namespace blargh {
 	class Subject {
@@ -11,5 +12,5 @@ namespace blargh {
 
 	private:
 		std::vector<Observer *> observers;
-	}
+	};
 }

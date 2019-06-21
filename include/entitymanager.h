@@ -13,5 +13,5 @@ namespace blargh {
 	private:
 		int nextEntityId = 0;
 		std::vector<std::shared_ptr<Entity>> entities;
-	}
+	};
 }
