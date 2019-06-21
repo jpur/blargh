@@ -9,7 +9,6 @@
 namespace blargh {
 	class BaseSystem : public Subject, public Observer {
 	public:
-		System();
 		void update();
 		void handleMessage(const std::string &msg, void *args);
 

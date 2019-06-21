@@ -9,15 +9,12 @@
 namespace blargh {
 	template <class... Tn>
 	class System : public BaseSystem {
-	public:
-		System(const Matcher<Tn...> &matcher);
-
 	protected:
 		virtual bool isValid(Entity &entity) {
 			return matcher.matches(entity);
 		}
 
 	private:
-		const Matcher<Tn...> matcher;
+		Matcher<Tn...> matcher;
 	};
 }
