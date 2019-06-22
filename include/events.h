@@ -1,2 +1,0 @@
-#define E_ENTITY_COMPONENT_ADDED "entityComponentAdded"
-#define E_ENTITY_COMPONENT_REMOVED "entityComponentRemoved"

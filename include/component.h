@@ -7,9 +7,8 @@ namespace blargh {
 	template <class T>
 	class Component {
 	public:
-		template <typename... Params>
-		static T *addComponent(int entityId, Params... params) {
-			return new T(entityId, params...);
+		static T &addComponent(int entityId) {
+			return *new T(entityId);
 		}
 
 		static void removeComponent(int entityId) {
@@ -18,19 +17,18 @@ namespace blargh {
 			components[entityId] = nullptr;
 		}
 
-
 		static T *getComponent(int entityId) {
 			if (!isAttached(entityId)) return nullptr;
-			return components[entityId];
+			return static_cast<T *>(components[entityId]);
 		}
 
 		static bool isAttached(int entityId) {
 			return (int)components.size() > entityId && components[entityId] != nullptr;
 		}
 
-	private:
+	protected:
 		Component(int entityId) : entityId(entityId) {
-			if (components.size() <= entityId) {
+			if ((int)components.size() <= entityId) {
 				components.resize(entityId+1);
 			}
 			components[entityId] = this;
@@ -40,10 +38,12 @@ namespace blargh {
 			components[entityId] = nullptr;
 		}
 
-		static std::vector<T *> components;
-		int entityId;
+		const int entityId;
+
+	private:
+		static std::vector<Component<T> *> components;
 	};
 
 	template <class T>
-	std::vector<T *> Component<T>::components;
+	std::vector<Component<T> *> Component<T>::components;
 }

@@ -1,14 +1,18 @@
 #pragma once
 
-#include "observer.h"
 #include <vector>
+#include <string>
+#include "observer.h"
+#include "event.h"
 
 namespace blargh {
+	class Observer;
+
 	class Subject {
 	public:
 		void addObserver(Observer &obs);
 		void removeObserver(Observer &obs);
-		void notify(void *msg);
+		void notify(const Event &event, const void *args);
 
 	private:
 		std::vector<Observer *> observers;

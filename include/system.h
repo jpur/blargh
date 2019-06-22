@@ -10,7 +10,7 @@ namespace blargh {
 	template <class... Tn>
 	class System : public BaseSystem {
 	protected:
-		virtual bool isValid(Entity &entity) {
+		bool isValid(Entity &entity) {
 			return matcher.matches(entity);
 		}
 

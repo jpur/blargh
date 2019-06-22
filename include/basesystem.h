@@ -10,7 +10,7 @@ namespace blargh {
 	class BaseSystem : public Subject, public Observer {
 	public:
 		void update();
-		void handleMessage(const std::string &msg, void *args);
+		void handleMessage(Subject &sender, const Event &event, const void *args);
 
 	protected:
 		virtual bool isValid(Entity &entity) = 0;

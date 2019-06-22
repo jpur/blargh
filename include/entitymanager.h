@@ -7,11 +7,14 @@
 namespace blargh {
 	class EntityManager : public Subject {
 	public:
-		std::shared_ptr<Entity> newEntity();
-		void destroyEntity(const std::shared_ptr<Entity> &entity);
+		Entity &newEntity();
+		void destroyEntity(Entity &entity);
+
+	protected:
+		int getNextEntityId();
 
 	private:
 		int nextEntityId = 0;
-		std::vector<std::shared_ptr<Entity>> entities;
+		std::vector<std::unique_ptr<Entity>> entities;
 	};
 }

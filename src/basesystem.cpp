@@ -1,5 +1,5 @@
 #include "basesystem.h"
-#include "events.h"
+#include "event.h"
 #include "entity.h"
 
 namespace blargh {
@@ -9,14 +9,14 @@ namespace blargh {
 		}
 	}
 
-	void BaseSystem::handleMessage(const std::string &msg, void *args) {
-		if (msg.compare(E_ENTITY_COMPONENT_ADDED) == 0 || msg.compare(E_ENTITY_COMPONENT_REMOVED) == 0) {
-			Entity *e = static_cast<Entity *>(args);
-			if (isValid(*e)) {
-				if ((int)entities.size() <= e->getId()) {
-					entities.resize(e->getId()+1);
+	void BaseSystem::handleMessage(Subject &sender, const Event &event, const void *args) {
+		if (event == Event::ENTITY_COMPONENT_ADDED || event == Event::ENTITY_COMPONENT_REMOVED) {
+			Entity &e = static_cast<Entity &>(sender);
+			if (isValid(e)) {
+				if ((int)entities.size() <= e.getId()) {
+					entities.resize(e.getId()+1);
 				}
-				entities[e->getId()] = e;
+				entities[e.getId()] = &e;
 			}
 		}
 	}
