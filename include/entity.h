@@ -8,9 +8,9 @@ namespace blargh {
 	public:
 		int getId() const;
 
-		template <class C>
-		C &addComponent() {
-			C &comp = C::addComponent(id);
+		template <class C, typename... Params>
+		C &addComponent(Params... params) {
+			C &comp = C::addComponent(id, params...);
 			notify(Event::ENTITY_COMPONENT_ADDED, nullptr);
 			return comp;
 		}		
@@ -22,8 +22,8 @@ namespace blargh {
 		}
 
 		template <class C>
-		C &getComponent() {
-			return *C::getComponent(id);
+		C *getComponent() {
+			return C::getComponent(id);
 		}
 
 	private:

@@ -9,6 +9,8 @@
 namespace blargh {
 	class BaseSystem : public Subject, public Observer {
 	public:
+		virtual ~BaseSystem() = default;
+		
 		void update();
 		void handleMessage(Subject &sender, const Event &event, const void *args);
 

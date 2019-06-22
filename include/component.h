@@ -4,46 +4,42 @@
 #include "entity.h"
 
 namespace blargh {
+	#define COMPONENT_INIT void 
+
 	template <class T>
 	class Component {
 	public:
-		static T &addComponent(int entityId) {
-			return *new T(entityId);
+		template <typename... Params>
+		static T &addComponent(int entityId, Params... params) {
+			if ((int)components.size() <= entityId) {
+				components.resize(entityId+1);
+			}
+			T &comp = components[entityId] = T(params...);
+			comp.entityId = entityId;
+			comp.attached = true;
+			return comp;
 		}
 
 		static void removeComponent(int entityId) {
-			if (components[entityId] == nullptr) return;
-			delete components[entityId];
-			components[entityId] = nullptr;
+			if (!isAttached(entityId)) return;
+			components[entityId].attached = false;
 		}
 
 		static T *getComponent(int entityId) {
 			if (!isAttached(entityId)) return nullptr;
-			return static_cast<T *>(components[entityId]);
+			return &components[entityId];
 		}
 
 		static bool isAttached(int entityId) {
-			return (int)components.size() > entityId && components[entityId] != nullptr;
+			return (int)components.size() > entityId && components[entityId].attached;
 		}
-
-	protected:
-		Component(int entityId) : entityId(entityId) {
-			if ((int)components.size() <= entityId) {
-				components.resize(entityId+1);
-			}
-			components[entityId] = this;
-		}
-
-		~Component() {
-			components[entityId] = nullptr;
-		}
-
-		const int entityId;
 
 	private:
-		static std::vector<Component<T> *> components;
+		int entityId = 1;
+		bool attached = false;
+		static std::vector<T> components;
 	};
 
 	template <class T>
-	std::vector<Component<T> *> Component<T>::components;
+	std::vector<T> Component<T>::components;
 }
