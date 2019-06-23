@@ -8,6 +8,6 @@ namespace blargh {
 	class Subject;
 	class Observer {
 	public:
-		virtual void handleMessage(Subject &sender, const Event &event, const void *args) = 0;
+		virtual void handleMessage(Subject &sender, const Event &event, void *args) = 0;
 	};
 }

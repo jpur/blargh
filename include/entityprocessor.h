@@ -10,9 +10,11 @@ namespace blargh {
 		void registerSystem(BaseSystem &sys);
 		void deregisterSystem(BaseSystem &sys);
 
-		void handleMessage(Subject &sender, const Event &event, const void *args);
+		void update();
+		void handleMessage(Subject &sender, const Event &event, void *args);
 
 	private:
 		EntityManager &emgr;
+		std::vector<BaseSystem *> systems;
 	};
 }

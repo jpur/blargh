@@ -12,7 +12,7 @@ namespace blargh {
 	public:
 		void addObserver(Observer &obs);
 		void removeObserver(Observer &obs);
-		void notify(const Event &event, const void *args);
+		void notify(const Event &event, void *args);
 
 	private:
 		std::vector<Observer *> observers;

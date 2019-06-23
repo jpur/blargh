@@ -9,7 +9,7 @@ namespace blargh {
 		}
 	}
 
-	void BaseSystem::handleMessage(Subject &sender, const Event &event, const void *args) {
+	void BaseSystem::handleMessage(Subject &sender, const Event &event, void *args) {
 		if (event == Event::ENTITY_COMPONENT_ADDED || event == Event::ENTITY_COMPONENT_REMOVED) {
 			Entity &e = static_cast<Entity &>(sender);
 			if (isValid(e)) {

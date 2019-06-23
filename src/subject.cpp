@@ -14,7 +14,7 @@ namespace blargh {
 		}
 	}
 
-	void Subject::notify(const Event &event, const void *args) {
+	void Subject::notify(const Event &event, void *args) {
 		for (auto &obs : observers) {
 			obs->handleMessage(*this, event, args);
 		}

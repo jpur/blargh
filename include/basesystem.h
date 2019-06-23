@@ -12,7 +12,7 @@ namespace blargh {
 		virtual ~BaseSystem() = default;
 		
 		void update();
-		void handleMessage(Subject &sender, const Event &event, const void *args);
+		void handleMessage(Subject &sender, const Event &event, void *args);
 
 	protected:
 		virtual bool isValid(Entity &entity) = 0;
