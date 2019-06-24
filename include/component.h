@@ -4,11 +4,10 @@
 #include "entity.h"
 
 namespace blargh {
-	#define COMPONENT_INIT void 
-
 	template <class T>
 	class Component {
 	public:
+		// Attaches a component to an entity
 		template <typename... Params>
 		static T &addComponent(int entityId, Params... params) {
 			if ((int)components.size() <= entityId) {
@@ -20,23 +19,30 @@ namespace blargh {
 			return comp;
 		}
 
+		// Removes a component from an entity
 		static void removeComponent(int entityId) {
 			if (!isAttached(entityId)) return;
 			components[entityId].attached = false;
 		}
 
+		// Gets a component attached to an entity
 		static T *getComponent(int entityId) {
 			if (!isAttached(entityId)) return nullptr;
 			return &components[entityId];
 		}
 
+		// Returns true if the specified component is attached to an entity
 		static bool isAttached(int entityId) {
 			return (int)components.size() > entityId && components[entityId].attached;
 		}
 
 	private:
+		// The entity this component is attached to
 		int entityId = 1;
+		// The attach state of the component
 		bool attached = false;
+
+		// Collection of all components of this type; components[k] corresponds to the component attached to entity with id=k
 		static std::vector<T> components;
 	};
 

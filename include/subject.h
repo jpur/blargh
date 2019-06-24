@@ -12,6 +12,8 @@ namespace blargh {
 	public:
 		void addObserver(Observer &obs);
 		void removeObserver(Observer &obs);
+
+		// Send an event with arguments to all observers
 		void notify(const Event &event, void *args);
 
 	private:

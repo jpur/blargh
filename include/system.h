@@ -10,6 +10,7 @@ namespace blargh {
 	template <class... Tn>
 	class System : public BaseSystem {
 	protected:
+		// Returns true if entity contains components of all types specified in the template
 		bool isValid(Entity &entity) {
 			return matcher.matches(entity);
 		}

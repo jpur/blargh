@@ -21,9 +21,11 @@ namespace blargh {
 
 	void EntityProcessor::handleMessage(Subject &sender, const Event &event, void *args) {
 		if (event == Event::ENTITY_NEW) {
+			// Listen to events of new entity
 			Entity *entity = static_cast<Entity *>(args);
 			entity->addObserver(*this);
 		} else if (event == Event::ENTITY_COMPONENT_ADDED || event == Event::ENTITY_COMPONENT_REMOVED) {
+			// Pass on event to registered systems
 			for (auto &sys : systems) {
 				sys->handleMessage(sender, event, args);
 			}
