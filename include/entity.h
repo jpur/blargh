@@ -33,5 +33,7 @@ namespace blargh {
 	private:
 		Entity(int id);
 		const int id;
+
+		friend class EntityManager;
 	};
 }

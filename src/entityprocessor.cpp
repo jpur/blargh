@@ -5,12 +5,9 @@ namespace blargh {
 	EntityProcessor::EntityProcessor(EntityManager &emgr) : emgr(emgr) {
 		emgr.addObserver(*this);
 	}
-
-	void EntityProcessor::registerSystem(BaseSystem &sys) {
-		systems.push_back(&sys);
-	}
 	
 	void EntityProcessor::deregisterSystem(BaseSystem &sys) {
+		systems.erase(std::find_if(systems.begin(), systems.end(), [psys = &sys](std::unique_ptr<BaseSystem> &p) { return p.get() == psys; }));
 	}
 
 	void EntityProcessor::update() {

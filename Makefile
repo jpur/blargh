@@ -1,11 +1,13 @@
-OBJS = $(wildcard src/*.cpp) $(wildcard src/ex/*.cpp)
+OBJS = $(wildcard src/*.cpp)
+OBJS_OTHER = $(wildcard src/*.cpp) $(wildcard example/src/*.cpp)
 CC = g++
-CFLAGS = -I$(CURDIR)/include -Wall -Wextra -Wno-unused-parameter
-LFLAGS = -static-libstdc++ -lSDL2main -lSDL2
-TARGET = ecs
+INCLUDE_PATHS = -I$(CURDIR)/include -I$(CURDIR)/example/include
+CFLAGS = -Wall -Wextra -Wno-unused-parameter
+LFLAGS = -static-libstdc++
+TARGET = blargh
 
-all: $(OBJS)
-	$(CC) $(OBJS) $(INCLUDE_PATHS) $(CFLAGS) $(LFLAGS) -o $(TARGET)
+all: $(OBJS_OTHER)
+	$(CC) $(OBJS_OTHER) $(INCLUDE_PATHS) $(CFLAGS) $(LFLAGS) -o $(TARGET)
 
 lib: $(OBJS)
-	$(CC) -fPIC $(OBJS) $(CFLAGS) -shared -o libecs.dll
+	$(CC) -fPIC $(OBJS) $(INCLUDE_PATHS) $(CFLAGS) -shared -o lib$(TARGET).dll

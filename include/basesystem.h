@@ -16,6 +16,9 @@ namespace blargh {
 		void handleMessage(Subject &sender, const Event &event, void *args);
 
 	protected:
+		virtual void preupdate();
+		virtual void postupdate();
+
 		// Returns true if the system should update this entity
 		virtual bool isValid(Entity &entity) = 0;
 		

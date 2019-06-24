@@ -1,3 +1,7 @@
+#pragma once
+
+#include <memory>
+#include <algorithm>
 #include "entitymanager.h"
 #include "basesystem.h"
 #include "observer.h"
@@ -7,7 +11,13 @@ namespace blargh {
 	public:
 		EntityProcessor(EntityManager &emgr);
 		
-		void registerSystem(BaseSystem &sys);
+		template <class T, typename... Params>
+		const BaseSystem &registerSystem(Params... params) {
+			auto sys = std::make_unique<T>(params...);
+			systems.push_back(std::move(sys));
+			return *sys;
+		}
+
 		void deregisterSystem(BaseSystem &sys);
 		
 		void update();
@@ -15,6 +25,6 @@ namespace blargh {
 
 	private:
 		EntityManager &emgr;
-		std::vector<BaseSystem *> systems;
+		std::vector<std::unique_ptr<BaseSystem>> systems;
 	};
 }
