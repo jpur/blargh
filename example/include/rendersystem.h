@@ -5,7 +5,6 @@
 #include "velocity.h"
 #include "entity.h"
 #include "character.h"
-#include "world.h"
 
 class RenderSystem : public blargh::System<Position, Character> {
 public:
@@ -18,7 +17,9 @@ protected:
 	void postupdate();
 
 private:
-	int width;
-	int height;
+	bool isVisible(const blargh::Entity &entity);
+
+	const int width;
+	const int height;
 	char *screen;
 };
