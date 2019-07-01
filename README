@@ -1,1 +1,1 @@
-Another implementation of an ECS, because there aren't enough already.
+A basic ECS implementation in C++, with an example!
