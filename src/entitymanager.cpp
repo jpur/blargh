@@ -10,7 +10,8 @@ namespace blargh {
 	}
 
 	void EntityManager::destroyEntity(Entity &entity) {
-
+		notify(Event::ENTITY_DESTROY, &entity);
+		entities[entity.getId()] = nullptr;
 	}
 
 	int EntityManager::getNextEntityId() {

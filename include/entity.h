@@ -12,7 +12,7 @@ namespace blargh {
 		// Attaches the specified component to this entity
 		template <class C, typename... Params>
 		C &addComponent(Params... params) {
-			C &comp = C::addComponent(id, params...);
+			C &comp = C::addComponent(*this, params...);
 			notify(Event::ENTITY_COMPONENT_ADDED, nullptr);
 			return comp;
 		}	
@@ -20,14 +20,14 @@ namespace blargh {
 		// Removes the specified component attached to this entity
 		template <class C>
 		void removeComponent() {
-			C::removeComponent(id);
+			C::removeComponent(*this);
 			notify(Event::ENTITY_COMPONENT_REMOVED, nullptr);
 		}
 
 		// Returns the specificed component attached to this entity
 		template <class C>
 		C *getComponent() const {
-			return C::getComponent(id);
+			return C::getComponent(*this);
 		}
 
 	private:
